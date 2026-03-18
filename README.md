@@ -112,15 +112,20 @@ disabled = 0
 
 nmap -p 3389 192.168.213.130
 
+![](https://github.com/DurgaPrasasd264/log-analysis-brute-force-detection-splunk/blob/1f68ca5436692d9cebbb5ad6ae5e20d8703f056d/SCREENSHOTS/image1.png)
+
 
 ### Brute Force (RDP)
 
 hydra -l testuser -P passwords.txt rdp://192.168.213.130 -t 1 -V
 
 
-✔ You will see:
+✔ I saw:
 - Failed attempts  
-- Successful password  
+- Successful password
+
+![](https://github.com/DurgaPrasasd264/log-analysis-brute-force-detection-splunk/blob/1f68ca5436692d9cebbb5ad6ae5e20d8703f056d/SCREENSHOTS/image2.png)
+
 
 ---
 
@@ -145,6 +150,8 @@ Applications → Internet → Remmina
 
 ✔ Remote Windows desktop opens
 
+![](https://github.com/DurgaPrasasd264/log-analysis-brute-force-detection-splunk/blob/1f68ca5436692d9cebbb5ad6ae5e20d8703f056d/SCREENSHOTS/image3.png)
+
 ---
 
 ## 🔨 STEP 6: WIRESHARK ANALYSIS
@@ -161,7 +168,9 @@ tcp.port == 3389
 ### Observe:
 - RDP handshake packets  
 - Multiple connection attempts  
-- Traffic spike during brute force  
+- Traffic spike during brute force
+
+![](https://github.com/DurgaPrasasd264/log-analysis-brute-force-detection-splunk/blob/1f68ca5436692d9cebbb5ad6ae5e20d8703f056d/SCREENSHOTS/image6.png)
 
 ---
 
@@ -183,6 +192,7 @@ index=* EventCode=4624
 index=* (EventCode=4624 OR EventCode=4625)
 | stats count by EventCode, Account_Name, src_ip
 
+![](https://github.com/DurgaPrasasd264/log-analysis-brute-force-detection-splunk/blob/1f68ca5436692d9cebbb5ad6ae5e20d8703f056d/SCREENSHOTS/image4.png)
 
 ---
 
@@ -193,7 +203,9 @@ Create panels:
 - Failed login attempts  
 - Successful logins  
 - Source IP activity  
-- Targeted usernames  
+- Targeted usernames
+
+![](https://github.com/DurgaPrasasd264/log-analysis-brute-force-detection-splunk/blob/1f68ca5436692d9cebbb5ad6ae5e20d8703f056d/SCREENSHOTS/image5.png)
 
 ---
 
@@ -222,16 +234,6 @@ Create panels:
 - Network Analysis  
 - SOC Workflow  
 
----
-
-## 📸 SCREENSHOTS TO ADD
-
-1. Nmap scan  
-2. Hydra output  
-3. Remmina RDP session  
-4. Splunk logs (4624 & 4625)  
-5. Dashboard  
-6. Wireshark capture  
 
 ---
 
